@@ -13,7 +13,7 @@ public class Driver {
 
 
         Calculadora calc = new Calculadora();
-        calc.Calculo("1 2 + 4 *");
+        System.out.println(calc.Calculo("1 2 + 4 * 3 +"));
 
     }
 }

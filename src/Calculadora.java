@@ -3,7 +3,8 @@ import java.util.Scanner;
 public class Calculadora implements CalculadoraGeneral{
 
     Scanner scan = new Scanner(System.in);
-    StackVector<Integer> numeros = new StackVector<Integer>();
+    StackVector<Float> numeros = new StackVector<Float>();
+        //son floats y no ints para no tener problema con la división
 
     public Calculadora(){}
 
@@ -12,44 +13,44 @@ public class Calculadora implements CalculadoraGeneral{
     {
         String resultado = "";
         float resuladonum = 0;
-        char[] exp = expresion.toCharArray();   //convierte el string a un array de character
-                                                //manejarlo más fácilmente
-
         //try {
 
-            for (int i = 0; i < exp.length; i++)
+            for (char c: expresion.toCharArray())
             {
-                if (Character.isDigit(exp[i]))
+                if (Character.isDigit(c))
                 {
                     //guardar el número que salió
-                    numeros.push((int)exp[i]);
+                    numeros.push((float)c);
                 }
+
+                else if (Character.isWhitespace(c)){
+                    //Ignorar porque es un espacio permitiendo que se ingresen expresiones con o
+                    //sin espacio
+                }
+
                 else {
                     //hay que operar
-                    int a = numeros.pop();
-                    int b = numeros.pop();
-                    int r = 0;
+                    float a = numeros.pop();
+                    float b = numeros.pop();
+                    float r;
 
-                    if (exp[i] == '+') {
+                    if (c == '+') {
                         r = a + b;
                         numeros.push(r);
-                    } else if (exp[i] == '-') {
+                    } else if (c == '-') {
                         r = a - b;
                         numeros.push(r);
-                    } else if (exp[i] == '*') {
+                    } else if (c == '*') {
                         r = a * b;
                         numeros.push(r);
-                    } else if (exp[i] == '/') {
+                    } else if (c == '/') {
                         r = (a / b);
                         numeros.push(r);
-                    }
-                    else {
-                        //ignorar porque es un espacio vacío
                     }
                 }
             }
             //}
-        return resultado;
+        return numeros.pop().toString();
     }
 
 
