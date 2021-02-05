@@ -11,10 +11,9 @@ public class Driver {
     public static void main (String[] args){
 
 
-        for (int i = 0; i < 10; i++){
 
-        }
-
+        Calculadora calc = new Calculadora();
+        calc.Calculo("1 2 + 4 *");
 
     }
 }
