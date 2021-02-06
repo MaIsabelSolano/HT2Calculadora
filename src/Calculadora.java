@@ -5,6 +5,10 @@ public class Calculadora implements CalculadoraGeneral{
 
     public Calculadora(){}
 
+    /**
+     * @param expresion
+     * @return Respuesta en String ya sea diciendo un número o que no est válida
+     */
     @Override
     public String Calculo(String expresion)
     {
@@ -12,42 +16,53 @@ public class Calculadora implements CalculadoraGeneral{
 
         char[] CCC = expresion.toCharArray();
 
-        for (char c: CCC)
-        {
-            if (Character.isDigit(c))
-            {
-                if (c == '1'){ numeros.push(1.0f);}
-                else if (c == '2'){numeros.push(2.0f);}
-                else if (c == '3'){numeros.push(3.0f);}
-                else if (c == '4'){numeros.push(4.0f);}
-                else if (c == '5'){numeros.push(5.0f);}
-                else if (c == '6'){numeros.push(6.0f);}
-                else if (c == '7'){numeros.push(7.0f);}
-                else if (c == '8'){numeros.push(8.0f);}
-                else if (c == '9'){numeros.push(9.0f);}
-                //Está así feo porque cuando convertía 'num' a float me daba un valor muy distinto
-            }
+        try {
+            for (char c : CCC) {
+                if (Character.isDigit(c)) {
+                    if (c == '1') {
+                        numeros.push(1.0f);
+                    } else if (c == '2') {
+                        numeros.push(2.0f);
+                    } else if (c == '3') {
+                        numeros.push(3.0f);
+                    } else if (c == '4') {
+                        numeros.push(4.0f);
+                    } else if (c == '5') {
+                        numeros.push(5.0f);
+                    } else if (c == '6') {
+                        numeros.push(6.0f);
+                    } else if (c == '7') {
+                        numeros.push(7.0f);
+                    } else if (c == '8') {
+                        numeros.push(8.0f);
+                    } else if (c == '9') {
+                        numeros.push(9.0f);
+                    } else if (c == '0') {
+                        numeros.push(0.0f);
+                    }
+                    //Está así feo porque cuando convertía 'num' a float me daba un valor muy distinto
+                } else if (Character.isWhitespace(c)) {
+                    //Ignorar porque es un espacio permitiendo que se ingresen expresiones con o
+                    //sin espacio
+                } else {
+                    //hay que operar
+                    float a = numeros.pop();
+                    float b = numeros.pop();
 
-            else if (Character.isWhitespace(c)){
-                //Ignorar porque es un espacio permitiendo que se ingresen expresiones con o
-                //sin espacio
-            }
-
-            else {
-                //hay que operar
-                float a = numeros.pop();
-                float b = numeros.pop();
-
-                if (c == '+') {
-                    numeros.push(a + b);
-                } else if (c == '-') {
-                    numeros.push(a - b);
-                } else if (c == '*') {
-                    numeros.push(a * b);
-                } else if (c == '/') {
-                    numeros.push(a / b);
+                    if (c == '+') {
+                        numeros.push(a + b);
+                    } else if (c == '-') {
+                        numeros.push(a - b);
+                    } else if (c == '*') {
+                        numeros.push(a * b);
+                    } else if (c == '/') {
+                        numeros.push(a / b);
+                    }
                 }
             }
+        }
+        catch (IndexOutOfBoundsException iob){
+            numeros.push(1.0f); //random para que no este vacío
         }
 
         resultado = "resultado " + numeros.pop().toString(); //Devolver respuesta
@@ -60,4 +75,3 @@ public class Calculadora implements CalculadoraGeneral{
 
 
 }
-
