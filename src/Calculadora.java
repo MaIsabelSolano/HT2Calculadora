@@ -1,8 +1,5 @@
-import java.util.Scanner;
-
 public class Calculadora implements CalculadoraGeneral{
 
-    Scanner scan = new Scanner(System.in);
     StackVector<Float> numeros = new StackVector<Float>();
         //son floats y no ints para no tener problema con la división
 
@@ -12,53 +9,55 @@ public class Calculadora implements CalculadoraGeneral{
     public String Calculo(String expresion)
     {
         String resultado = "";
-        float resuladonum = 0;
-        //try {
 
-            for (char c: expresion.toCharArray())
+        char[] CCC = expresion.toCharArray();
+
+        for (char c: CCC)
+        {
+            if (Character.isDigit(c))
             {
-                if (Character.isDigit(c))
-                {
-                    //guardar el número que salió
-                    numeros.push((float)c);
-                }
+                if (c == '1'){ numeros.push(1.0f);}
+                else if (c == '2'){numeros.push(2.0f);}
+                else if (c == '3'){numeros.push(3.0f);}
+                else if (c == '4'){numeros.push(4.0f);}
+                else if (c == '5'){numeros.push(5.0f);}
+                else if (c == '6'){numeros.push(6.0f);}
+                else if (c == '7'){numeros.push(7.0f);}
+                else if (c == '8'){numeros.push(8.0f);}
+                else if (c == '9'){numeros.push(9.0f);}
+                //Está así feo porque cuando convertía 'num' a float me daba un valor muy distinto
+            }
 
-                else if (Character.isWhitespace(c)){
-                    //Ignorar porque es un espacio permitiendo que se ingresen expresiones con o
-                    //sin espacio
-                }
+            else if (Character.isWhitespace(c)){
+                //Ignorar porque es un espacio permitiendo que se ingresen expresiones con o
+                //sin espacio
+            }
 
-                else {
-                    //hay que operar
-                    float a = numeros.pop();
-                    float b = numeros.pop();
-                    float r;
+            else {
+                //hay que operar
+                float a = numeros.pop();
+                float b = numeros.pop();
 
-                    if (c == '+') {
-                        r = a + b;
-                        numeros.push(r);
-                    } else if (c == '-') {
-                        r = a - b;
-                        numeros.push(r);
-                    } else if (c == '*') {
-                        r = a * b;
-                        numeros.push(r);
-                    } else if (c == '/') {
-                        r = (a / b);
-                        numeros.push(r);
-                    }
+                if (c == '+') {
+                    numeros.push(a + b);
+                } else if (c == '-') {
+                    numeros.push(a - b);
+                } else if (c == '*') {
+                    numeros.push(a * b);
+                } else if (c == '/') {
+                    numeros.push(a / b);
                 }
             }
-            //}
-        return numeros.pop().toString();
+        }
+
+        resultado = "resultado " + numeros.pop().toString(); //Devolver respuesta
+        if (numeros.empty() == false){
+            //Aun hay elementose en el stack por lo que no es una expresion correcta
+            resultado = "La expresion no es correcta";
+        }
+        return resultado;
     }
 
 
-        //}
-        //catch (){
-            //Hubo un error
-            //resultado = "La expresion ingresada no es valida";
-            //scan.nextLine();
-        //}
 }
 

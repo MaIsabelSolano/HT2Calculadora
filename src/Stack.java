@@ -3,23 +3,35 @@
 public interface Stack<E>
 {
 
+    /**
+     *
+     * @param item
+     */
     public void push(E item);
-    // pre:
-    // post: item is added to stack
-    // will be popped next if no intervening push
 
+    /**
+     * pre: stack not empty
+     * @return valor arriba del stack y lo elimina
+     */
     public E pop();
-    // pre: stack is not empty
-    // post: most recently pushed item is removed and returned
 
+    /**
+     * pre: stack not empty
+     * @return valor arriba del stack
+     */
     public E peek();
-    // pre: stack is not empty
-    // post: top value (next to be popped) is returned
 
+
+    /** Determina si está vacío o no
+     *
+     * @return true si está vacío y false si no lo está
+     */
     public boolean empty();
-    // post: returns true if and only if the stack is empty
 
+    /**
+     *
+     * @return int con la cantidad del elementos en el stack
+     */
     public int size();
-    // post: returns the number of elements in the stack
 
 }
