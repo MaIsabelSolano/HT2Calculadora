@@ -1,48 +1,37 @@
 //Es la clase que se encontraba en canvas
 
-import java.util.ArrayList;
-
-public class StackVector<E>
-        implements Stack<E>
+public interface Stack<E>
 {
-    protected ArrayList<E> data;
 
-    public StackVector()
-    // post: constructs a new, empty stack
-    {
-        data = new ArrayList<E>();
-    }
+    /**
+     *
+     * @param item
+     */
+    public void push(E item);
 
-    public void push(E item)
-    // post: the value is added to the stack
-    //          will be popped next if no intervening push
-    {
-        data.add(item);
-    }
+    /**
+     * pre: stack not empty
+     * @return valor arriba del stack y lo elimina
+     */
+    public E pop();
 
-    public E pop()
-    // pre: stack is not empty
-    // post: most recently pushed item is removed and returned
-    {
-        return data.remove(size()-1);
-    }
+    /**
+     * pre: stack not empty
+     * @return valor arriba del stack
+     */
+    public E peek();
 
-    public E peek()
-    // pre: stack is not empty
-    // post: top value (next to be popped) is returned
-    {
-        return data.get(size() - 1);
-    }
 
-    public int size()
-    // post: returns the number of elements in the stack
-    {
-        return data.size();
-    }
+    /** Determina si está vacío o no
+     *
+     * @return true si está vacío y false si no lo está
+     */
+    public boolean empty();
 
-    public boolean empty()
-    // post: returns true if and only if the stack is empty
-    {
-        return size() == 0;
-    }
+    /**
+     *
+     * @return int con la cantidad del elementos en el stack
+     */
+    public int size();
+
 }
